@@ -25,16 +25,6 @@ export const PLASMIC = initPlasmicLoader({
 // http://localhost:3000/plasmic-host).  See
 // https://docs.plasmic.app/learn/app-hosting/#set-a-plasmic-project-to-use-your-app-host
 
-// PLASMIC.registerComponent(...);
-PLASMIC.registerGlobalContext(ContextProvider, {
-  name: 'Web3Context',
-  props: {
-    initialState: 'object',
-    children: 'string',
-  },
-  providesData: true,
-
-})
 
 PLASMIC.registerComponent(WalletConnectModal, {
   name: 'WalletConnectModal',
