@@ -28,7 +28,4 @@ export const PLASMIC = initPlasmicLoader({
 
 PLASMIC.registerComponent(WalletConnectModal, {
   name: 'WalletConnectModal',
-  props: {
-    color: 'string',
-  }
 })

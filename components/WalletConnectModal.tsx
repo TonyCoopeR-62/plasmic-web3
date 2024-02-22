@@ -1,7 +1,9 @@
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+
 const WalletConnectModal = (props) => {
   return (
     <div {...props}>
-      <w3m-button />
+      <ConnectButton />
     </div>
   )
 }
