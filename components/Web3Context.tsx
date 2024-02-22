@@ -1,36 +1,37 @@
-'use client'
-
+import '@rainbow-me/rainbowkit/styles.css';
 import { ReactNode } from 'react'
-import { config, projectId } from '@/config'
-
-import { createWeb3Modal } from '@web3modal/wagmi/react'
-
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
-import { State, WagmiProvider } from 'wagmi'
+import { WagmiProvider } from 'wagmi'
+import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { arbitrum, mainnet, optimism, polygon, sepolia } from 'wagmi/chains'
 
 // Setup queryClient
 const queryClient = new QueryClient()
 
+const projectId = process.env.NEXT_PUBLIC_PROJECT_ID || ""
+
 if (!projectId) throw new Error('Project ID is not defined')
 
-// Create modal
-createWeb3Modal({
-  wagmiConfig: config,
+
+const config = getDefaultConfig({
+  appName: 'web3-plasmic-app',
   projectId,
-  enableAnalytics: true // Optional - defaults to your Cloud configuration
-})
+  chains: [mainnet, polygon, optimism, arbitrum, sepolia],
+  ssr: true,
+});
 
 export default function ContextProvider({
   children,
-  initialState
 }: {
   children: ReactNode
-  initialState?: State
 }) {
   return (
-    <WagmiProvider config={config} initialState={initialState}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider>
+          {children}
+        </RainbowKitProvider>
+      </QueryClientProvider>
     </WagmiProvider>
   )
 }
