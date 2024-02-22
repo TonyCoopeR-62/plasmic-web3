@@ -1,6 +1,5 @@
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
 import WalletConnectModal from "./components/WalletConnectModal";
-import ContextProvider from "./components/Web3Context";
 
 
 export const PLASMIC = initPlasmicLoader({
@@ -28,4 +27,7 @@ export const PLASMIC = initPlasmicLoader({
 
 PLASMIC.registerComponent(WalletConnectModal, {
   name: 'WalletConnectModal',
+  props: {
+    className: 'string',
+  }
 })
